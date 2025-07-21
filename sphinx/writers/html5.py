@@ -972,6 +972,9 @@ class HTML5Translator(SphinxTranslator, BaseTranslator):  # type: ignore[misc]
         visit, _ = self.builder.env._registry.html_inline_math_renderers[name]
         visit(self, node)
 
+    def super_visit_math(self, node: nodes.math) -> None:
+        super().visit_math(node)
+
     def depart_math(self, node: nodes.math, math_env: str = '') -> None:
         # see validate_math_renderer
         name: str = self.builder.math_renderer_name  # type: ignore[assignment]
@@ -986,6 +989,9 @@ class HTML5Translator(SphinxTranslator, BaseTranslator):  # type: ignore[misc]
         name: str = self.builder.math_renderer_name  # type: ignore[assignment]
         visit, _ = self.builder.env._registry.html_block_math_renderers[name]
         visit(self, node)
+
+    def super_visit_math_block(self, node):
+        return super().visit_math_block(node)
 
     def depart_math_block(self, node: nodes.math_block, math_env: str = '') -> None:
         # see validate_math_renderer
