@@ -1542,11 +1542,7 @@ def setup(app: Sphinx) -> ExtensionMetadata:
     app.connect('config-inited', validate_html_favicon, priority=800)
     app.connect('config-inited', error_on_html_sidebars_string_values, priority=800)
     app.connect('config-inited', error_on_html_4, priority=800)
-    app.connect('builder-inited', validate_math_renderer)
     app.connect('html-page-context', setup_resource_paths)
-
-    # load default math renderer
-    app.setup_extension('sphinx.ext.mathjax')
 
     return {
         'version': 'builtin',

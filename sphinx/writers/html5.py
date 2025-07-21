@@ -964,36 +964,6 @@ class HTML5Translator(SphinxTranslator, BaseTranslator):  # type: ignore[misc]
         else:
             node['classes'].append('field-odd')
 
-    def visit_math(self, node: nodes.math, math_env: str = '') -> None:
-        self._has_maths_elements = True
-
-        # see validate_math_renderer
-        name: str = self.builder.math_renderer_name  # type: ignore[assignment]
-        visit, _ = self.builder.env._registry.html_inline_math_renderers[name]
-        visit(self, node)
-
-    def depart_math(self, node: nodes.math, math_env: str = '') -> None:
-        # see validate_math_renderer
-        name: str = self.builder.math_renderer_name  # type: ignore[assignment]
-        _, depart = self.builder.env._registry.html_inline_math_renderers[name]
-        if depart:
-            depart(self, node)
-
-    def visit_math_block(self, node: nodes.math_block, math_env: str = '') -> None:
-        self._has_maths_elements = True
-
-        # see validate_math_renderer
-        name: str = self.builder.math_renderer_name  # type: ignore[assignment]
-        visit, _ = self.builder.env._registry.html_block_math_renderers[name]
-        visit(self, node)
-
-    def depart_math_block(self, node: nodes.math_block, math_env: str = '') -> None:
-        # see validate_math_renderer
-        name: str = self.builder.math_renderer_name  # type: ignore[assignment]
-        _, depart = self.builder.env._registry.html_block_math_renderers[name]
-        if depart:
-            depart(self, node)
-
     # See Docutils r9413
     # Re-instate the footnote-reference class
     def visit_footnote_reference(self, node: Element) -> None:
